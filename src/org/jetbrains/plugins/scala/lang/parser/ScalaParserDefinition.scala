@@ -11,7 +11,6 @@ import com.intellij.psi.{FileViewProvider, PsiFile}
 import org.jetbrains.plugins.dotty.lang.parser.{DottyElementTypes, DottyParser, DottyPsiCreator}
 import org.jetbrains.plugins.scala.lang.lexer.{ScalaLexer, ScalaTokenTypes}
 import org.jetbrains.plugins.scala.lang.psi.impl.ScalaFileImpl
-import org.jetbrains.plugins.scala.project.ProjectExt
 import org.jetbrains.plugins.scala.settings._
 
 /**
@@ -19,7 +18,7 @@ import org.jetbrains.plugins.scala.settings._
  */
 class ScalaParserDefinition extends ScalaParserDefinitionWrapper {
 
-  private var hasDotty = false
+  private val hasDotty = true
 
   def createLexer(project: Project) = {
     val treatDocCommentAsBlockComment = ScalaProjectSettings.getInstance(project).isTreatDocCommentAsBlockComment
@@ -27,7 +26,7 @@ class ScalaParserDefinition extends ScalaParserDefinitionWrapper {
   }
 
   def createParser(project: Project) = {
-    hasDotty = project.hasDotty
+    //    hasDotty = project.hasDotty
     if (hasDotty) new DottyParser else new ScalaParser
   }
 
